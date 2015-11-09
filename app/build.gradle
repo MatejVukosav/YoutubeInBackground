@@ -1,6 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+
+        release {
+            storeFile file("youtube_in_background.keystore")
+            storePassword "yibvuki"
+            keyAlias 'youtube_in_background'
+            keyPassword 'yibvuki'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
@@ -14,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     productFlavors {
@@ -23,9 +33,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22+'
-
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'net.simonvt.menudrawer:menudrawer:3.0.6'
-
-    compile files('C:\\Users\\Vuki\\AndroidStudioProjects\\YoutubeBackgroundPlayer\\YouTubeAndroidPlayerApi-1.2.1/libs/YouTubeAndroidPlayerApi.jar')
+    compile files('C:\\Users\\Vuki\\My Programming\\Android\\Android_Studio_Workspace\\YoutubeInBackground\\YouTubeAndroidPlayerApi-1.2.1\\libs\\YouTubeAndroidPlayerApi.jar')
 }

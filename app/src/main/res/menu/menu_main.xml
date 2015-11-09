@@ -5,11 +5,6 @@
 
 
     <item
-        android:id="@+id/mobileView"
-        android:orderInCategory="100"
-        android:title="mobile view" />
-
-    <item
         android:id="@+id/regularView"
         android:orderInCategory="100"
         android:title="desktop view" />

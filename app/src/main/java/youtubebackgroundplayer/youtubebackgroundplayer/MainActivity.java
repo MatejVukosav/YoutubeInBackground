@@ -3,7 +3,6 @@ package youtubebackgroundplayer.youtubebackgroundplayer;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,14 +27,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.webView)
-    WebView webView;
+    public static WebView webView;
     WebSettings webSettings;
 
-    @Bind({R.id.mobileView,R.id.desktopView,R.id.facebookView, R.id.googleView ,R.id.youtube_playerView})
+    @Bind({R.id.desktopView, R.id.facebookView, R.id.googleView})
     List<TextView> settingsView;
-
-    View mCustomView;
 
     private static final String TAG = "MainActivity";
     private static final String urlWebYoutube = "https://www.youtube.com/";
@@ -52,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    public static final int USER_MOBILE  = 0;
+    public static final int USER_MOBILE = 0;
     public static final int USER_DESKTOP = 1;
 
 
@@ -65,8 +61,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawer = MenuDrawer.attach(this, Position.LEFT);//, MenuDrawer.MENU_DRAG_CONTENT, Position.TOP);
         mDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_BEZEL);
         mDrawer.setMenuSize(210);
+        //set content view
         mDrawer.setContentView(R.layout.activity_main);
         mDrawer.setMenuView(R.layout.menu_layout);
+
+        webView = (WebView) findViewById(R.id.webView);
 
         ButterKnife.bind(this);
 
@@ -76,8 +75,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         init();
 
+
+    }
+
+
+    private void init() {
+
+
+        //preferences = this.getSharedPreferences(urlMode,MODE_PRIVATE);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = preferences.edit();
+
+        webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.supportMultipleWindows();
+        webSettings.setCacheMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+        webSettings.setLoadsImagesAutomatically(true);
+
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClient());
+
+        //set initial prefs
+        url = preferences.getString(urlSaveChoice, urlWebYoutube);
+        setStars(preferences.getInt(urlSaveChoiceId, R.id.webView));
+        webView.loadUrl(url);
+
+        setAlertDialog();
+
+    }
+
+    private void setAlertDialog() {
+
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        progressBar = ProgressDialog.show(MainActivity.this, "YouTubeBackground", "Loading...");
+        progressBar = ProgressDialog.show(MainActivity.this, "YouTubeInBackground", "Loading...");
         webView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.i(TAG, "Processing webview url click...");
@@ -113,35 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
-
     }
-
-
-    private void init() {
-
-        //preferences = this.getSharedPreferences(urlMode,MODE_PRIVATE);
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = preferences.edit();
-
-        webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-        webSettings.supportMultipleWindows();
-        webSettings.setCacheMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
-        webSettings.setLoadsImagesAutomatically(true);
-
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient());
-
-
-        url = preferences.getString(urlSaveChoice, urlWebYoutube);
-        setStars(preferences.getInt(urlSaveChoiceId, R.id.desktopView));
-        webView.loadUrl(url);
-
-    }
-
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -181,10 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
-
-    private void saveChoice(String choice,int id) {
+    private void saveChoice(String choice, int id) {
         editor.putString(urlSaveChoice, choice);
         editor.putInt(urlSaveChoiceId, id);
         editor.apply();
@@ -195,36 +195,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = v.getId();
         Log.d("id", String.valueOf(id));
         switch (id) {
-            case R.id.mobileView:
-                url = urlMobileYoutube;
-                saveChoice(url,id);
-                setStars(id);
-                webView.loadUrl(url);
-                break;
             case R.id.desktopView:
                 url = urlWebYoutube;
-                saveChoice(url,id);
+                saveChoice(url, id);
                 setStars(id);
                 webView.loadUrl(url);
                 break;
 
             case R.id.facebookView:
                 url = urlFacebook;
-                saveChoice(url,id);
+                saveChoice(url, id);
                 setStars(id);
                 webView.loadUrl(url);
                 break;
 
             case R.id.googleView:
                 url = urlGoogle;
-                saveChoice(url,id);
+                saveChoice(url, id);
                 setStars(id);
                 webView.loadUrl(url);
-                break;
-
-            case R.id.youtube_playerView:
-                Intent intent=new Intent(this,YouTubePlayer.class);
-                startActivity(intent);
                 break;
         }
     }
@@ -240,5 +229,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        webView.saveState(outState);
+        super.onSaveInstanceState(outState);
+    }
 }

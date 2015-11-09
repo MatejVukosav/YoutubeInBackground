@@ -14,17 +14,6 @@
         android:drawableLeft="@drawable/abc_btn_rating_star_on_mtrl_alpha"
         android:text="web youtube " />
 
-    <TextView
-        android:id="@+id/mobileView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:tag="Item no. 4"
-        android:drawableLeft="@drawable/abc_btn_rating_star_off_mtrl_alpha"
-        android:layout_below="@id/desktopView"
-        android:text="mobile youtube" />
-
 
     <TextView
         android:id="@+id/googleView"
@@ -34,7 +23,7 @@
         android:gravity="center"
         android:drawableLeft="@drawable/abc_btn_rating_star_off_mtrl_alpha"
         android:tag="Item no. 2"
-        android:layout_below="@id/mobileView"
+        android:layout_below="@id/desktopView"
         android:text="google" />
 
     <TextView
@@ -48,16 +37,6 @@
         android:layout_below="@id/googleView"
         android:text="facebook" />
 
-    <TextView
-        android:id="@+id/youtube_playerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:drawableLeft="@drawable/abc_btn_rating_star_off_mtrl_alpha"
-        android:tag="Item no. 4"
-        android:layout_below="@id/facebookView"
-        android:text="youTubePlayer" />
 
     <TextView
         android:id="@+id/author"
@@ -66,7 +45,7 @@
         android:layout_marginLeft="10dp"
         android:gravity="center"
         android:drawableLeft="@android:drawable/btn_star"
-        android:tag="Item no. 5"
+        android:tag="Item no. 4"
         android:layout_above="@+id/author_mail"
         android:text=" \u003C Vuki \u003E " />
 
@@ -76,7 +55,7 @@
         android:layout_height="wrap_content"
        android:layout_margin="5dp"
         android:gravity="center"
-        android:tag="Item no. 6"
+        android:tag="Item no. 5"
         android:layout_alignParentBottom="true"
         android:text="vuki146@gmail.com" />
 

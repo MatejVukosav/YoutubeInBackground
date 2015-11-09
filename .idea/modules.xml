@@ -3,7 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YoutubeBackgroundPlayer.iml" filepath="$PROJECT_DIR$/YoutubeBackgroundPlayer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/src/androidtest/androidtest.iml" filepath="$PROJECT_DIR$/app/src/androidtest/androidtest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myapp/app.iml" filepath="$PROJECT_DIR$/myapp/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/src/main/main.iml" filepath="$PROJECT_DIR$/app/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-menudrawer-master/menudrawer/menudrawer.iml" filepath="$PROJECT_DIR$/android-menudrawer-master/menudrawer/menudrawer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-menudrawer-master/menudrawer-samples/menudrawer-samples.iml" filepath="$PROJECT_DIR$/android-menudrawer-master/menudrawer-samples/menudrawer-samples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myapp/myapp1.iml" filepath="$PROJECT_DIR$/myapp/myapp1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YouTubeAndroidPlayerApi-1.2.1/sample/sample.iml" filepath="$PROJECT_DIR$/YouTubeAndroidPlayerApi-1.2.1/sample/sample.iml" />
     </modules>
   </component>
 </project>
