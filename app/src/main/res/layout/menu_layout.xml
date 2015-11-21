@@ -12,7 +12,7 @@
         android:gravity="center"
         android:tag="Item no. 1"
         android:drawableLeft="@drawable/abc_btn_rating_star_on_mtrl_alpha"
-        android:text="web youtube " />
+        android:text="youtube " />
 
 
     <TextView

@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("id", String.valueOf(id));
         switch (id) {
             case R.id.desktopView:
-                url = urlWebYoutube;
+                url = urlMobileYoutube;
                 saveChoice(url, id);
                 setStars(id);
                 webView.loadUrl(url);
